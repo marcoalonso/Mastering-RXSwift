@@ -7,4 +7,5 @@ target 'RxSwiftDemo' do
 
   # Pods for RxSwiftDemo
 pod 'RxSwift'
+pod 'RxCocoa'
 end

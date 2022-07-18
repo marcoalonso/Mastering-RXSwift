@@ -1,5 +1,5 @@
 import UIKit
-
+import RxCocoa
 import RxSwift
 /*
  
@@ -69,7 +69,7 @@ Observable<String>.create { observer in
     return Disposables.create() //esta es la forma de crear la bolsa de desechos
 }.subscribe(onNext: { print($0) }, onError: { print($0) }, onCompleted: {print("Completed :) ")}, onDisposed: {print("Disposed :/ ")})
     .disposed(by: disposeBag)
- */
+ 
 
 
 // MARK: - Subjects
@@ -94,3 +94,95 @@ subject.dispose() //al llamar a desechar, ya no habrá mas métodos onNext, ni t
 subject.onCompleted()//ya no se mostrará ya que ya se desecho la subscripcion
 
 subject.onNext("Issue 4") //ya no se mostrará ya que ya se desecho la subscripcion
+ 
+
+
+// MARK: - BehaviorSubject
+ ///BehaviorSubject: almacena el evento next() más reciente, que se puede reproducir para los nuevos suscriptores, un nuevo suscriptor puede recibir el evento next() más reciente incluso si se suscribe después de que se emitió el evento.  No debe tener un búfer vacío, por lo que se inicializa con un valor inicial que actúa como el evento next() inicial, este valor se sobrescribe tan pronto como se agrega un nuevo elemento a la secuencia.
+ 
+// Es muy parecido al PublishSubject a diferencia de que necesita un valor inicial para cuando alguien se suscriba a el, éste le dara ese valor incial o el último valor registrado.
+let disposeBag = DisposeBag()
+
+let subject = BehaviorSubject(value: "Initial Value")
+
+//Aqui se muestra el ultimo valor que sobre-escribe al valor inicial o por defecto
+subject.onNext("Last Issue ")
+subject.onNext("Issue 2")
+
+subject.subscribe { event in
+    print(event) //Shows Issue 2 cause is the last value
+}
+
+//Aqui se muestra el primer valor por defecto y despues muestra el ultimo valor guardado
+//subject.onNext("Issue 1")
+ 
+
+
+// MARK: - ReplaySubject
+ ///ReplaySubject:  le brinda la posibilidad de reproducir muchos eventos próximos, especifica el tamaño de su búfer cuando crea una instancia de ReplaySubject, y mantiene sus próximos eventos más recientes hasta el límite del búfer. Cuando se agrega un nuevo suscriptor, los eventos almacenados en el búfer se reproducen uno tras otro como si estuvieran ocurriendo en rápida sucesión inmediatamente después de la suscripción. Una vez más, los eventos de parada se vuelven a emitir a los nuevos suscriptores.
+
+let disposeBag = DisposeBag()
+
+let subject = ReplaySubject<String>.create(bufferSize: 2)
+//Cuando nuevos suscriptores se suscriban a este sujeto, ellos automaticamente van a reproducir los ultimos n valores que se hayan emitido por el sujeto.
+//Si se agregan mas eventos las nuevas subscripciones solo van a emitir los últimos n valores que se hayan emitido -> lines: "142-145"
+subject.onNext("Issue 1")
+subject.onNext("Issue 2")
+subject.onNext("Issue 3")
+
+
+//Creamos la subscripcion y veamos que pasa:
+subject.subscribe {
+    print($0) //itera e imprime cada evento
+}
+subject.onNext("Issue 4")
+subject.onNext("Issue 5")
+subject.onNext("Issue 6")
+
+print("[Subscription 2]")
+subject.subscribe {
+    print($0) //itera e imprime cada evento
+}
+
+*/
+
+
+// MARK: - BehaviorRelay
+///Relay (Antes Variable): es un envoltorio alrededor de BehaviorSubject que permite un manejo más simple, proporciona una sintaxis de puntos para obtener y establecer un valor único que se emite como un evento next() y se almacena para su reproducción.   La propiedad .value expuesta obtiene y establece el valor en una propiedad _value almacenada de forma privada.   también tiene un método .asObservable() que devuelve el BehaviorSubject privado para administrar sus suscriptores.
+    
+    //No permiten la terminación anticipada. En otras palabras, no puede enviar un evento de error() o complete() para terminar la secuencia. Simplemente espere a que se desasigne la variable y finalice la secuencia en su método deinit.
+let disposeBag = DisposeBag()
+
+let relay = BehaviorRelay(value: "Initial Value")
+let relay2 = BehaviorRelay(value: [String]())
+
+//relay2.value.append("Item 1") //No se puede cambiar el valor, para ello hay una funcion llamada .accept
+relay2.accept(["Item 1"]) //Esto sobre-escribe el valor pero si queremos añadir
+relay2.accept(relay2.value + ["Item 2"])
+
+//Pero hay otra forma de agregar mas valores a un arreglo
+var value = relay2.value
+value.append("Item 3")
+value.append("Item 4")
+value.append("Item 5")
+relay2.accept(value)
+
+//Sub 1
+relay.asObservable()
+    .subscribe {
+        print($0)
+    }
+    .disposed(by: disposeBag)
+
+//relay.value = "Hi" //No se puede cambiar el valor, para ello hay una funcion llamada .accept
+//relay.accept("Hi")
+
+//Sub 2
+relay2.asObservable()
+    .subscribe {
+        print($0)
+    }
+    .disposed(by: disposeBag)
+
+
+
