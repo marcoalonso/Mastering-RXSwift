@@ -73,7 +73,7 @@ Observable<String>.create { observer in
 
 
 // MARK: - Subjects
-///Un sujeto es un tipo reactivo que es tanto una secuencia observable como un observador. Pueden aceptar suscripciones y emitir eventos, así como agregar nuevos elementos a la secuencia. Hay cuatro tipos de asunto: PublishSubject , BehaviorSubject , Relay(Variable), ReplaySubject
+///Un sujeto es un tipo reactivo que es tanto una secuencia observable como un observador. Pueden aceptar suscripciones y emitir eventos, así como agregar nuevos elementos a la secuencia. Hay cuatro tipos de subjects: PublishSubject , BehaviorSubject , Relay(Variable), ReplaySubject
 let disposeBag = DisposeBag()
 
 let subject = PublishSubject<String>()
