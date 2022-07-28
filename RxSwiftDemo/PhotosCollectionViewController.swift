@@ -41,10 +41,12 @@ class PhotosCollectionViewController: UICollectionViewController {
         let selectedAsset = self.images[indexPath.row]
         PHImageManager.default().requestImage(for: selectedAsset, targetSize: CGSize(width: 400, height: 300), contentMode: .aspectFit, options: nil) { [weak self] image, info in
             guard let info = info else { return }
-            let isDegradedImage = info["PHImageResultsIsDegradedKey"] as! Bool
+            let isDegradedImage = info["PHImageResultIsDegradedKey"] as! Bool
             
+            //SI aun no se ah degradado?
             if !isDegradedImage {
                 if let image = image {
+                    //Se le agrega la imagen al sujeto
                     self?.selectedPhotosSubject.onNext(image)
                     self?.dismiss(animated: true)
                 }
