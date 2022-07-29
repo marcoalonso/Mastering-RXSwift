@@ -13,6 +13,7 @@
 		60530E8B288486000085717A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60530E89288486000085717A /* Main.storyboard */; };
 		60530E8D288486020085717A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60530E8C288486020085717A /* Assets.xcassets */; };
 		60530E90288486020085717A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60530E8E288486020085717A /* LaunchScreen.storyboard */; };
+		607FAC8428935EE900DFE9CA /* FilterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FAC8328935EE900DFE9CA /* FilterService.swift */; };
 		60F9BF3B2885EF8F00F97A8E /* PhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F9BF3A2885EF8F00F97A8E /* PhotosCollectionViewController.swift */; };
 		60F9BF3D2886124200F97A8E /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F9BF3C2886124200F97A8E /* PhotoCollectionViewCell.swift */; };
 		B8539666D446973BAE32DC4C /* Pods_RxSwiftDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CB39879DD24AA3A3AA9C933 /* Pods_RxSwiftDemo.framework */; };
@@ -29,6 +30,7 @@
 		60530E8F288486020085717A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		60530E91288486020085717A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60530E9828848C270085717A /* RxSwift.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RxSwift.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		607FAC8328935EE900DFE9CA /* FilterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterService.swift; sourceTree = "<group>"; };
 		60F9BF3A2885EF8F00F97A8E /* PhotosCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewController.swift; sourceTree = "<group>"; };
 		60F9BF3C2886124200F97A8E /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		C40618E65DBF2E478C524148 /* Pods-RxSwiftDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwiftDemo.release.xcconfig"; path = "Target Support Files/Pods-RxSwiftDemo/Pods-RxSwiftDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				60530E8E288486020085717A /* LaunchScreen.storyboard */,
 				60530E91288486020085717A /* Info.plist */,
 				60F9BF3C2886124200F97A8E /* PhotoCollectionViewCell.swift */,
+				607FAC8328935EE900DFE9CA /* FilterService.swift */,
 			);
 			path = RxSwiftDemo;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				60530E88288486000085717A /* ViewController.swift in Sources */,
 				60F9BF3D2886124200F97A8E /* PhotoCollectionViewCell.swift in Sources */,
 				60530E84288486000085717A /* AppDelegate.swift in Sources */,
+				607FAC8428935EE900DFE9CA /* FilterService.swift in Sources */,
 				60530E86288486000085717A /* SceneDelegate.swift in Sources */,
 				60F9BF3B2885EF8F00F97A8E /* PhotosCollectionViewController.swift in Sources */,
 			);
